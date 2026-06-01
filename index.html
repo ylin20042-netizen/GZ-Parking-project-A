@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GZ Parking Assistant Pro｜广州停车助手</title>
+  <meta name="description" content="广州停车助手：地图找车位、智能推荐、客户需求提交、月保车位展示，支持 GitHub Pages 开源部署。" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#"><img src="assets/logo.svg" alt="GZ Parking Assistant"></a>
+      <nav class="nav-menu">
+        <a href="#map">停车地图</a>
+        <a href="#recommend">智能推荐</a>
+        <a href="#parking">车位列表</a>
+        <a href="#lead">提交需求</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="nav-cta" href="#lead">立即咨询</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">广州停车助手 · 开源项目</span>
+        <h1>地图找车位 + 智能推荐 + 客户需求提交</h1>
+        <p>面向广州长期停车、月保车位、出差停车和闲置车停放场景。适合 GitHub Pages 免费部署，也适合作为本地生活服务开源项目。</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#map">查看地图</a>
+          <a class="btn ghost" href="#recommend">智能推荐</a>
+          <a class="btn green" href="#lead">提交需求</a>
+        </div>
+        <div class="trust-row">
+          <span>JSON 数据管理</span><span>手机端适配</span><span>开源可部署</span><span>无后端可运行</span>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <h3>快速咨询</h3>
+        <p>填写停车区域、预算、车型和停放时间，系统可推荐合适停车场。</p>
+        <div class="line"><span>电话</span><strong>13800000000</strong></div>
+        <div class="line"><span>微信</span><strong id="wechatId">youpaicheyouhui</strong></div>
+        <button id="copyWechat" class="mini-btn">复制微信号</button>
+        <img src="assets/qrcode-placeholder.svg" alt="二维码预留">
+      </aside>
+    </div>
+  </section>
+
+  <main>
+    <section class="stats container">
+      <div class="stat-card"><strong id="parkingCount">0</strong><span>停车场</span></div>
+      <div class="stat-card"><strong id="spaceCount">0</strong><span>剩余车位</span></div>
+      <div class="stat-card"><strong id="areaCount">0</strong><span>覆盖区域</span></div>
+      <div class="stat-card"><strong id="minPrice">0</strong><span>最低月租</span></div>
+    </section>
+
+    <section id="map" class="section container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Map Search</span>
+          <h2>广州停车地图</h2>
+          <p>点击地图点位查看停车场详情，点位数据来自 <code>data/parking.json</code>。</p>
+        </div>
+      </div>
+      <div id="mapView"></div>
+    </section>
+
+    <section id="recommend" class="section soft">
+      <div class="container recommend-grid">
+        <div>
+          <span class="eyebrow">Smart Recommendation</span>
+          <h2>智能推荐车位</h2>
+          <p>基于区域、预算、室内需求、机场周边、长期停放等条件进行规则打分，推荐最匹配的停车场。</p>
+          <form class="recommend-form" onsubmit="return false;">
+            <label>停车区域
+              <select id="recArea"><option value="all">不限区域</option></select>
+            </label>
+            <label>最高预算
+              <input id="recBudget" type="number" placeholder="例如 400">
+            </label>
+            <label><input id="recIndoor" type="checkbox"> 需要室内停车</label>
+            <label><input id="recAirport" type="checkbox"> 需要机场周边</label>
+            <label><input id="recLongTerm" type="checkbox" checked> 长期停放</label>
+            <button id="recommendBtn" type="button">一键推荐</button>
+          </form>
+        </div>
+        <div id="recommendResults" class="recommend-results"></div>
+      </div>
+    </section>
+
+    <section id="parking" class="section container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Parking List</span>
+          <h2>月保车位列表</h2>
+          <p>支持区域、价格、关键词和“只看有位”筛选。</p>
+        </div>
+        <div class="filters">
+          <select id="areaFilter"><option value="all">全部区域</option></select>
+          <select id="priceFilter"><option value="all">全部价格</option><option value="300">300元以内</option><option value="400">400元以内</option></select>
+          <label class="checkbox"><input id="availableOnly" type="checkbox"> 只看有位</label>
+          <input id="searchInput" type="search" placeholder="搜索区域 / 停车场 / 类型">
+        </div>
+      </div>
+      <div id="parkingList" class="parking-grid"></div>
+    </section>
+
+    <section id="lead" class="section container lead-grid">
+      <div class="lead-copy">
+        <span class="eyebrow">Lead Form</span>
+        <h2>客户需求提交单</h2>
+        <p>静态版不会上传到服务器，点击按钮可一键复制需求文本，也会临时保存在浏览器 localStorage，适合无后端快速获客。</p>
+        <div class="lead-tools">
+          <button id="loadLastLead">读取上次填写</button>
+          <button id="clearLastLead">清空本地记录</button>
+        </div>
+      </div>
+      <form class="lead-form" onsubmit="return false;">
+        <label>姓名<input id="leadName" type="text" placeholder="请输入姓名"></label>
+        <label>手机号<input id="leadPhone" type="text" placeholder="请输入手机号"></label>
+        <label>微信号<input id="leadWechat" type="text" placeholder="请输入微信号"></label>
+        <label>停车区域<input id="leadArea" type="text" placeholder="例如：天河区"></label>
+        <label>车型<input id="leadCar" type="text" placeholder="例如：SUV / 轿车"></label>
+        <label>停放时长<input id="leadDuration" type="text" placeholder="例如：15天 / 1个月 / 长期"></label>
+        <label>预算范围<input id="leadBudget" type="text" placeholder="例如：300-400元/月"></label>
+        <label class="full">备注<textarea id="leadNote" placeholder="例如：希望室内、24小时监控、长期不用车"></textarea></label>
+        <button id="copyDemandBtn" type="button">复制需求信息</button>
+        <p class="form-tip">复制后发送给微信客服即可。</p>
+      </form>
+    </section>
+
+    <section id="faq" class="section container">
+      <span class="eyebrow">FAQ</span>
+      <h2>常见问题</h2>
+      <div class="faq-grid">
+        <details open><summary>这个项目需要后端吗？</summary><p>基础版本不需要后端，直接用 GitHub Pages + JSON 文件运行。</p></details>
+        <details><summary>如何新增停车场？</summary><p>修改 data/parking.json，复制一条停车场数据并改字段即可。</p></details>
+        <details><summary>推荐算法是 AI 吗？</summary><p>当前是可解释的规则打分算法，后续可扩展 AI 推荐。</p></details>
+        <details><summary>表单会保存到哪里？</summary><p>静态版本会临时保存在浏览器 localStorage，并支持复制给客服。</p></details>
+      </div>
+    </section>
+
+    <section class="section container open-source">
+      <span class="eyebrow">Open Source</span>
+      <h2>开源项目说明</h2>
+      <p>GZ Parking Assistant Pro 结合停车地图、智能推荐和需求提交，是一个适合本地生活服务、GitHub Pages 部署、JSON 数据管理和开源学习的实用项目。</p>
+    </section>
+  </main>
+
+  <div class="float-actions">
+    <a href="tel:13800000000">电话</a>
+    <a href="#lead">微信</a>
+    <a href="#recommend">推荐</a>
+  </div>
+
+  <footer class="footer"><div class="container"><p>© 2026 GZ Parking Assistant Pro · Open Source</p></div></footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

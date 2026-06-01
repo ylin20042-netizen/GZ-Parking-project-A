@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+<rect width="180" height="180" rx="22" fill="#eef7ff"/>
+<rect x="28" y="28" width="42" height="42" fill="#2b7de9"/>
+<rect x="110" y="28" width="42" height="42" fill="#2b7de9"/>
+<rect x="28" y="110" width="42" height="42" fill="#2b7de9"/>
+<rect x="84" y="84" width="18" height="18" fill="#1557a6"/>
+<rect x="112" y="96" width="18" height="18" fill="#1557a6"/>
+<rect x="86" y="124" width="16" height="16" fill="#1557a6"/>
+<rect x="126" y="126" width="24" height="24" fill="#1557a6"/>
+<text x="43" y="166" font-family="Arial, Microsoft YaHei" font-size="13" fill="#1557a6">微信二维码预留</text>
+</svg>

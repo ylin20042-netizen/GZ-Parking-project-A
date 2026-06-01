@@ -1,0 +1,14 @@
+[
+  {
+    "name": "张先生",
+    "phone": "13800000000",
+    "wechat": "gzparking001",
+    "area": "天河区",
+    "vehicle": "SUV",
+    "budget": "300-400",
+    "duration": "长期",
+    "indoorRequired": true,
+    "longTerm": true,
+    "notes": "希望位置安全，适合闲置车长期停放"
+  }
+]

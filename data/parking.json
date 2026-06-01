@@ -1,0 +1,121 @@
+[
+  {
+    "id": 1,
+    "name": "天河棠下长期停车场",
+    "area": "天河区",
+    "address": "广州市天河区棠下附近",
+    "lat": 23.1246,
+    "lng": 113.3612,
+    "type": "室内 / 露天",
+    "monthlyPrice": 399,
+    "availableSpaces": 12,
+    "status": "有位",
+    "indoor": true,
+    "airportNearby": false,
+    "longTerm": true,
+    "security": "24小时监控",
+    "suitableFor": "长期停放、闲置车辆、出差停车",
+    "description": "适合车辆长期停放，位置稳定，月保价格友好。",
+    "features": [
+      "价格友好",
+      "长期停放",
+      "监控覆盖",
+      "天河区域"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "白云机场周边停车场",
+    "area": "白云区",
+    "address": "广州市白云区机场周边",
+    "lat": 23.3924,
+    "lng": 113.2988,
+    "type": "露天停车场",
+    "monthlyPrice": 299,
+    "availableSpaces": 8,
+    "status": "紧张",
+    "indoor": false,
+    "airportNearby": true,
+    "longTerm": true,
+    "security": "有人值守",
+    "suitableFor": "出差停车、机场周边长期停车",
+    "description": "适合出差或旅游期间长期停放，具体接驳方式需咨询确认。",
+    "features": [
+      "机场周边",
+      "出差停车",
+      "价格低",
+      "长期月保"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "番禺大型合作停车场",
+    "area": "番禺区",
+    "address": "广州市番禺区大型合作场地",
+    "lat": 22.9386,
+    "lng": 113.3841,
+    "type": "大型停车场",
+    "monthlyPrice": 350,
+    "availableSpaces": 20,
+    "status": "有位",
+    "indoor": false,
+    "airportNearby": false,
+    "longTerm": true,
+    "security": "出入口管理",
+    "suitableFor": "长期停放、多车停放、企业车辆",
+    "description": "车位较充足，适合企业车辆、闲置车辆或长期不用车车主。",
+    "features": [
+      "车位充足",
+      "企业车辆",
+      "多车停放",
+      "长期合作"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "黄埔科学城停车场",
+    "area": "黄埔区",
+    "address": "广州市黄埔区科学城附近",
+    "lat": 23.1795,
+    "lng": 113.4512,
+    "type": "室内停车场",
+    "monthlyPrice": 380,
+    "availableSpaces": 10,
+    "status": "有位",
+    "indoor": true,
+    "airportNearby": false,
+    "longTerm": true,
+    "security": "智能道闸",
+    "suitableFor": "商务车辆、长期停车、工作日少用车",
+    "description": "适合黄埔科学城附近长期停放，车场管理规范。",
+    "features": [
+      "室内停车",
+      "智能道闸",
+      "商务车辆",
+      "位置稳定"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "广州南站周边停车场",
+    "area": "番禺区",
+    "address": "广州市番禺区广州南站周边",
+    "lat": 22.9884,
+    "lng": 113.2695,
+    "type": "露天 / 临停月保",
+    "monthlyPrice": 320,
+    "availableSpaces": 15,
+    "status": "有位",
+    "indoor": false,
+    "airportNearby": false,
+    "longTerm": true,
+    "security": "出入口管理",
+    "suitableFor": "高铁出行、长期停车、短期月保",
+    "description": "适合广州南站周边临时出行或长期停放需求。",
+    "features": [
+      "高铁周边",
+      "月保",
+      "余位较多"
+    ]
+  }
+]
